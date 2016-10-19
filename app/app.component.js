@@ -8,18 +8,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
+var Festival = (function () {
+    function Festival() {
+    }
+    return Festival;
+}());
+exports.Festival = Festival;
+;
 var AppComponent = (function () {
     function AppComponent() {
+        this.title = 'Tour of Festivals';
+        this.festival = {
+            id: 1,
+            name: 'Glatonbury'
+        };
     }
-    AppComponent = __decorate([
-        core_1.Component({
-            selector: 'my-app',
-            template: '<h1>My First Angular App</h1>'
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AppComponent);
     return AppComponent;
 }());
+AppComponent = __decorate([
+    core_1.Component({
+        selector: 'my-app',
+        template: '<h1>{{title}}</h1>   <h2>{{festival.name}} details!</h2>   <div><label>id: </label>{{festival.id}}</div>   <div><label>name: </label><input value="{{festival.name}}" placeholder="name"></div>'
+    }),
+    __metadata("design:paramtypes", [])
+], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map
