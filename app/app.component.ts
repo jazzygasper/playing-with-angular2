@@ -7,7 +7,15 @@ export class Festival {
 
 @Component({
   selector: 'my-app',
-  template: '<h1>{{title}}</h1>   <h2>{{festival.name}} details!</h2>   <div><label>id: </label>{{festival.id}}</div>   <div><label>name: </label><input value="{{festival.name}}" placeholder="name"></div>'
+  template: `
+  <h1>{{title}}</h1>
+  <h2>{{festival.name}} details!</h2>
+  <div><label>id: </label>{{festival.id}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="festival.name" placeholder="name">
+  </div>
+  `
 })
 
 export class AppComponent {

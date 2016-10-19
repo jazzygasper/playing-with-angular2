@@ -29,7 +29,7 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: '<h1>{{title}}</h1>   <h2>{{festival.name}} details!</h2>   <div><label>id: </label>{{festival.id}}</div>   <div><label>name: </label><input value="{{festival.name}}" placeholder="name"></div>'
+        template: "\n  <h1>{{title}}</h1>\n  <h2>{{festival.name}} details!</h2>\n  <div><label>id: </label>{{festival.id}}</div>\n  <div>\n    <label>name: </label>\n    <input [(ngModel)]=\"festival.name\" placeholder=\"name\">\n  </div>\n  "
     }),
     __metadata("design:paramtypes", [])
 ], AppComponent);
