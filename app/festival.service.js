@@ -8,13 +8,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var mock_festivals_1 = require('./mock-festivals');
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+require("rxjs/add/operator/toPromise");
 var FestivalService = (function () {
-    function FestivalService() {
+    function FestivalService(http) {
+        this.http = http;
+        this.festivalsUrl = 'app/festivals';
     }
     FestivalService.prototype.getFestivals = function () {
-        return Promise.resolve(mock_festivals_1.FESTIVALS);
+        return this.http.get(this.festivalsUrl)
+            .toPromise()
+            .then(function (response) { return response.json().data; })
+            .catch(this.handleError);
     };
     FestivalService.prototype.getFestivalssSlowly = function () {
         var _this = this;
@@ -27,11 +33,11 @@ var FestivalService = (function () {
         return this.getFestivals()
             .then(function (festivals) { return festivals.find(function (festival) { return festival.id === id; }); });
     };
-    FestivalService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], FestivalService);
     return FestivalService;
 }());
+FestivalService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], FestivalService);
 exports.FestivalService = FestivalService;
 //# sourceMappingURL=festival.service.js.map

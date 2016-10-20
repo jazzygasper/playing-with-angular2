@@ -1,13 +1,22 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Injectable }    from '@angular/core';
+import { Headers, Http } from '@angular/http';
 
-import { FESTIVALS } from './mock-festivals';
+import 'rxjs/add/operator/toPromise';
+
 import { Festival } from './festival';
 
 @Injectable()
 export class FestivalService {
+
+  private festivalsUrl = 'app/festivals';
+
+  constructor(private http: Http) { }
+
   getFestivals(): Promise<Festival[]> {
-    return Promise.resolve(FESTIVALS);
+    return this.http.get(this.festivalsUrl)
+               .toPromise()
+               .then(response => response.json().data as Festival[])
+               .catch(this.handleError);
   }
 
   getFestivalssSlowly(): Promise<Festival[]> {
