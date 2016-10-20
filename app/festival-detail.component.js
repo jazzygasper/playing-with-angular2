@@ -9,18 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AppComponent = (function () {
-    function AppComponent() {
-        this.title = 'Tour of Festivals';
+var festival_1 = require('./festival');
+var FestivalDetailComponent = (function () {
+    function FestivalDetailComponent() {
     }
-    AppComponent = __decorate([
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', festival_1.Festival)
+    ], FestivalDetailComponent.prototype, "festival", void 0);
+    FestivalDetailComponent = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            template: "\n    <h1>{{title}}</h1>\n    <my-festivals></my-festivals>\n  "
+            selector: 'my-festival-detail',
+            template: "\n    <div *ngIf=\"festival\">\n      <h2>{{festival.name}} details!</h2>\n      <div><label>id: </label>{{festival.id}}</div>\n      <div>\n        <label>name: </label>\n        <input [(ngModel)]=\"festival.name\" placeholder=\"name\"/>\n      </div>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], FestivalDetailComponent);
+    return FestivalDetailComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.FestivalDetailComponent = FestivalDetailComponent;
+//# sourceMappingURL=festival-detail.component.js.map
