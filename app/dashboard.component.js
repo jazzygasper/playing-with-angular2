@@ -11,35 +11,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var festival_service_1 = require('./festival.service');
-var FestivalsComponent = (function () {
-    function FestivalsComponent(router, festivalService) {
+var DashboardComponent = (function () {
+    function DashboardComponent(router, festivalService) {
         this.router = router;
         this.festivalService = festivalService;
+        this.festivals = [];
     }
-    FestivalsComponent.prototype.getFestivals = function () {
+    DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.festivalService.getFestivals().then(function (festivals) { return _this.festivals = festivals; });
+        this.festivalService.getFestivals()
+            .then(function (festivals) { return _this.festivals = festivals.slice(0, 4); });
     };
-    FestivalsComponent.prototype.ngOnInit = function () {
-        this.getFestivals();
+    DashboardComponent.prototype.gotoDetail = function (festival) {
+        var link = ['/detail', festival.id];
+        this.router.navigate(link);
     };
-    FestivalsComponent.prototype.onSelect = function (festival) {
-        this.selectedFestival = festival;
-    };
-    FestivalsComponent.prototype.gotoDetail = function () {
-        this.router.navigate(['/detail', this.selectedFestival.id]);
-    };
-    FestivalsComponent = __decorate([
+    DashboardComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'my-festivals',
-            templateUrl: 'festivals.component.html',
-            styleUrls: ['festivals.component.css'],
-            providers: [festival_service_1.FestivalService]
+            selector: 'my-dashboard',
+            templateUrl: 'dashboard.component.html',
+            styleUrls: ['dashboard.component.css'],
         }), 
         __metadata('design:paramtypes', [router_1.Router, festival_service_1.FestivalService])
-    ], FestivalsComponent);
-    return FestivalsComponent;
+    ], DashboardComponent);
+    return DashboardComponent;
 }());
-exports.FestivalsComponent = FestivalsComponent;
-//# sourceMappingURL=festivals.component.js.map
+exports.DashboardComponent = DashboardComponent;
+//# sourceMappingURL=dashboard.component.js.map

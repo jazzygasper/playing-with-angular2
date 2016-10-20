@@ -23,6 +23,10 @@ var FestivalService = (function () {
         }) // delay 2 seconds
             .then(function () { return _this.getFestivals(); });
     };
+    FestivalService.prototype.getFestival = function (id) {
+        return this.getFestivals()
+            .then(function (festivals) { return festivals.find(function (festival) { return festival.id === id; }); });
+    };
     FestivalService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])

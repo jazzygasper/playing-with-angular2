@@ -4,23 +4,22 @@ import { FormsModule }   from '@angular/forms';
 import { RouterModule }   from '@angular/router';
 
 import { AppComponent }   from './app.component';
+import { DashboardComponent }   from './dashboard.component';
 import { FestivalsComponent }   from './festivals.component';
 import { FestivalDetailComponent } from './festival-detail.component';
 import { FestivalService }   from './festival.service';
+
+import { AppRoutingModule }     from './app-routing.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot([
-      {
-        path: 'festivals',
-        component: FestivalsComponent
-      }
-    ])
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,
+    DashboardComponent,
     FestivalsComponent,
     FestivalDetailComponent
   ],

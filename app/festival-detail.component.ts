@@ -1,21 +1,35 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Params }   from '@angular/router';
+import { Location }                 from '@angular/common';
 
 import { Festival } from './festival';
+import { FestivalService }   from './festival.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'my-festival-detail',
-  template: `
-    <div *ngIf="festival">
-      <h2>{{festival.name}} details!</h2>
-      <div><label>id: </label>{{festival.id}}</div>
-      <div>
-        <label>name: </label>
-        <input [(ngModel)]="festival.name" placeholder="name"/>
-      </div>
-    </div>
-  `
+  templateUrl: 'festival-detail.component.html',
+  styleUrls: [ 'festival-detail.component.css' ],
 })
-export class FestivalDetailComponent {
-  @Input()
+export class FestivalDetailComponent implements OnInit {
   festival: Festival;
+
+  constructor(
+  private festivalService: FestivalService,
+  private route: ActivatedRoute,
+  private location: Location
+  ) {}
+
+  ngOnInit(): void {
+    this.route.params.forEach((params: Params) => {
+      let id = +params['id'];
+      this.festivalService.getFestival(id)
+        .then(festival => this.festival = festival);
+    });
+  }
+
+  goBack(): void {
+  this.location.back();
+}
+
 }

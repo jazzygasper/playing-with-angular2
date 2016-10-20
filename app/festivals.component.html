@@ -1,0 +1,14 @@
+<h2>My Festivals</h2>
+<ul class="festivals">
+  <li *ngFor="let festival of festivals"
+    [class.selected]="festival === selectedFestival"
+    (click)="onSelect(festival)">
+    <span class="badge">{{festival.id}}</span> {{festival.name}}
+  </li>
+</ul>
+<div *ngIf="selectedFestival">
+  <h2>
+    {{selectedFestival.name | uppercase}} is my festival
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>

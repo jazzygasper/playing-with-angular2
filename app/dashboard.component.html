@@ -1,0 +1,8 @@
+<h3>Top Festivals</h3>
+<div class="grid grid-pad">
+  <div *ngFor="let festival of festivals" (click)="gotoDetail(festival)" class="col-1-4">
+    <div class="module festival">
+      <h4>{{festival.name}}</h4>
+    </div>
+  </div>
+</div>
