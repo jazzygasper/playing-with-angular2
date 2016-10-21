@@ -1,3 +1,5 @@
+import './rxjs-extensions';
+
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
@@ -12,6 +14,7 @@ import { DashboardComponent }   from './dashboard.component';
 import { FestivalsComponent }   from './festivals.component';
 import { FestivalDetailComponent } from './festival-detail.component';
 import { FestivalService }   from './festival.service';
+import { FestivalSearchComponent }   from './festival-search.component';
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -27,7 +30,8 @@ import { AppRoutingModule }     from './app-routing.module';
     AppComponent,
     DashboardComponent,
     FestivalsComponent,
-    FestivalDetailComponent
+    FestivalDetailComponent,
+    FestivalSearchComponent
   ],
   providers: [
     FestivalService
