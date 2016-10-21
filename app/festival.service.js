@@ -14,6 +14,7 @@ require("rxjs/add/operator/toPromise");
 var FestivalService = (function () {
     function FestivalService(http) {
         this.http = http;
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         this.festivalsUrl = 'app/festivals';
     }
     FestivalService.prototype.getFestivals = function () {
@@ -22,7 +23,15 @@ var FestivalService = (function () {
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
-    FestivalService.prototype.getFestivalssSlowly = function () {
+    FestivalService.prototype.update = function (festival) {
+        var url = this.festivalsUrl + "/" + festival.id;
+        return this.http
+            .put(url, JSON.stringify(festival), { headers: this.headers })
+            .toPromise()
+            .then(function () { return festival; })
+            .catch(this.handleError);
+    };
+    FestivalService.prototype.getFestivalsSlowly = function () {
         var _this = this;
         return new Promise(function (resolve) {
             return setTimeout(resolve, 2000);
@@ -32,6 +41,10 @@ var FestivalService = (function () {
     FestivalService.prototype.getFestival = function (id) {
         return this.getFestivals()
             .then(function (festivals) { return festivals.find(function (festival) { return festival.id === id; }); });
+    };
+    FestivalService.prototype.handleError = function (error) {
+        console.error('An error occurred', error);
+        return Promise.reject(error.message || error);
     };
     return FestivalService;
 }());

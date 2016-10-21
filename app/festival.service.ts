@@ -8,6 +8,7 @@ import { Festival } from './festival';
 @Injectable()
 export class FestivalService {
 
+  private headers = new Headers({'Content-Type': 'application/json'})
   private festivalsUrl = 'app/festivals';
 
   constructor(private http: Http) { }
@@ -19,7 +20,16 @@ export class FestivalService {
                .catch(this.handleError);
   }
 
-  getFestivalssSlowly(): Promise<Festival[]> {
+  update(festival: Festival): Promise<Festival> {
+    const url = `${this.festivalsUrl}/${festival.id}`;
+    return this.http
+      .put(url, JSON.stringify(festival), {headers: this.headers})
+      .toPromise()
+      .then(() => festival)
+      .catch(this.handleError);
+  }
+
+  getFestivalsSlowly(): Promise<Festival[]> {
   return new Promise<Festival[]>(resolve =>
     setTimeout(resolve, 2000)) // delay 2 seconds
     .then(() => this.getFestivals());
@@ -28,6 +38,11 @@ export class FestivalService {
   getFestival(id: number): Promise<Festival> {
     return this.getFestivals()
                .then(festivals => festivals.find(festival => festival.id === id));
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error);
+    return Promise.reject(error.message || error);
   }
 
 }

@@ -29,6 +29,11 @@ var FestivalDetailComponent = (function () {
     FestivalDetailComponent.prototype.goBack = function () {
         this.location.back();
     };
+    FestivalDetailComponent.prototype.save = function () {
+        var _this = this;
+        this.festivalService.update(this.festival)
+            .then(function () { return _this.goBack(); });
+    };
     FestivalDetailComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

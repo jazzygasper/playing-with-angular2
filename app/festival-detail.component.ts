@@ -29,7 +29,12 @@ export class FestivalDetailComponent implements OnInit {
   }
 
   goBack(): void {
-  this.location.back();
-}
+    this.location.back();
+  }
+
+  save(): void {
+    this.festivalService.update(this.festival)
+    .then(() => this.goBack());
+  }
 
 }
