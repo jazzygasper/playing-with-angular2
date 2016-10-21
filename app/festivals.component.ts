@@ -36,6 +36,15 @@ import { FestivalService } from './festival.service';
         });
     }
 
+    delete(festival: Festival): void {
+      this.festivalService
+        .delete(festival.id)
+        .then(() => {
+          this.festivals = this.festivals.filter(f => f !== festival);
+          if (this.selectedFestival === festival) { this.selectedFestival = null; }
+      });
+    }
+
     ngOnInit(): void {
       this.getFestivals();
     }

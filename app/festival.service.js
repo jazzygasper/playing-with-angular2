@@ -38,6 +38,13 @@ var FestivalService = (function () {
             .then(function () { return festival; })
             .catch(this.handleError);
     };
+    FestivalService.prototype.delete = function (id) {
+        var url = this.festivalsUrl + "/" + id;
+        return this.http.delete(url, { headers: this.headers })
+            .toPromise()
+            .then(function () { return null; })
+            .catch(this.handleError);
+    };
     FestivalService.prototype.getFestivalsSlowly = function () {
         var _this = this;
         return new Promise(function (resolve) {

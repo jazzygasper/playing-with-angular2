@@ -37,6 +37,14 @@ export class FestivalService {
       .catch(this.handleError);
   }
 
+  delete(id: number): Promise<void> {
+    const url = `${this.festivalsUrl}/${id}`;
+    return this.http.delete(url, {headers: this.headers})
+      .toPromise()
+      .then(() => null)
+      .catch(this.handleError);
+  }
+
   getFestivalsSlowly(): Promise<Festival[]> {
   return new Promise<Festival[]>(resolve =>
     setTimeout(resolve, 2000)) // delay 2 seconds

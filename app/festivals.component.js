@@ -32,6 +32,17 @@ var FestivalsComponent = (function () {
             _this.selectedFestival = null;
         });
     };
+    FestivalsComponent.prototype.delete = function (festival) {
+        var _this = this;
+        this.festivalService
+            .delete(festival.id)
+            .then(function () {
+            _this.festivals = _this.festivals.filter(function (f) { return f !== festival; });
+            if (_this.selectedFestival === festival) {
+                _this.selectedFestival = null;
+            }
+        });
+    };
     FestivalsComponent.prototype.ngOnInit = function () {
         this.getFestivals();
     };

@@ -10,6 +10,8 @@
     [class.selected]="festival === selectedFestival"
     (click)="onSelect(festival)">
     <span class="badge">{{festival.id}}</span> {{festival.name}}
+    <button class="delete"
+      (click)="delete(festival); $event.stopPropagation()">x</button>
   </li>
 </ul>
 <div *ngIf="selectedFestival">
