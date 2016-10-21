@@ -26,6 +26,16 @@ import { FestivalService } from './festival.service';
       this.festivalService.getFestivals().then(festivals => this.festivals = festivals);
     }
 
+    add(name: string): void {
+      name = name.trim();
+      if (!name) { return; }
+      this.festivalService.create(name)
+        .then(festival => {
+          this.festivals.push(festival);
+          this.selectedFestival = null;
+        });
+    }
+
     ngOnInit(): void {
       this.getFestivals();
     }

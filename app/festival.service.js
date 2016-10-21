@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
-require("rxjs/add/operator/toPromise");
+var core_1 = require('@angular/core');
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/toPromise');
 var FestivalService = (function () {
     function FestivalService(http) {
         this.http = http;
@@ -21,6 +21,13 @@ var FestivalService = (function () {
         return this.http.get(this.festivalsUrl)
             .toPromise()
             .then(function (response) { return response.json().data; })
+            .catch(this.handleError);
+    };
+    FestivalService.prototype.create = function (name) {
+        return this.http
+            .post(this.festivalsUrl, JSON.stringify({ name: name }), { headers: this.headers })
+            .toPromise()
+            .then(function (res) { return res.json().data; })
             .catch(this.handleError);
     };
     FestivalService.prototype.update = function (festival) {
@@ -46,11 +53,11 @@ var FestivalService = (function () {
         console.error('An error occurred', error);
         return Promise.reject(error.message || error);
     };
+    FestivalService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_1.Http])
+    ], FestivalService);
     return FestivalService;
 }());
-FestivalService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
-], FestivalService);
 exports.FestivalService = FestivalService;
 //# sourceMappingURL=festival.service.js.map

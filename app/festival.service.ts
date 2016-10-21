@@ -20,6 +20,14 @@ export class FestivalService {
                .catch(this.handleError);
   }
 
+  create(name: string): Promise<Festival> {
+    return this.http
+      .post(this.festivalsUrl, JSON.stringify({name: name}), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data)
+      .catch(this.handleError);
+  }
+
   update(festival: Festival): Promise<Festival> {
     const url = `${this.festivalsUrl}/${festival.id}`;
     return this.http

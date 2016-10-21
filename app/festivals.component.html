@@ -1,4 +1,10 @@
 <h2>My Festivals</h2>
+<div>
+  <label>Festival name:</label> <input #festivalName />
+  <button (click)="add(festivalName.value); festivalName.value=''">
+    Add
+  </button>
+</div>
 <ul class="festivals">
   <li *ngFor="let festival of festivals"
     [class.selected]="festival === selectedFestival"
